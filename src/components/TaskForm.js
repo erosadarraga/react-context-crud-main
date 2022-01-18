@@ -39,7 +39,7 @@ const TaskForm = () => {
 
   return (
     <div className="flex justify-center items-center h-3/4">
-      <form onSubmit={handleSubmit} className="bg-gray-900 p-10">
+      <form onSubmit={handleSubmit} className="bg-gray-700  p-10">
         <h2 className="text-3xl mb-7">
           {task.id ? 'Update ' : 'Create '}A Task
         </h2>
@@ -50,7 +50,7 @@ const TaskForm = () => {
             value={task.title}
             onChange={handleChange}
             placeholder="Write a title"
-            className="py-3 px-4 focus:outline-none focus:text-gray-100 bg-gray-700  w-full"
+            className="py-3 px-4 focus:outline-none focus:text-gray-200 bg-gray-600  w-full"
             autoFocus
           />
         </div>
@@ -61,7 +61,7 @@ const TaskForm = () => {
             rows="2"
             placeholder="write a description"
             onChange={handleChange}
-            className="py-3 px-4 focus:outline-none focus:text-gray-100 bg-gray-700 w-full"
+            className="py-3 px-4 focus:outline-none focus:text-gray-200 bg-gray-600 w-full"
           ></textarea>
           <button className="bg-green-600 w-full hover:bg-green-500 py-2 px-4 mt-5">
             {task.id ? 'Update Task' : 'Create Task'}

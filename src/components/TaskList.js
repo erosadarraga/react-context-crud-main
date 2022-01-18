@@ -1,76 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { GlobalContext } from '../context/GlobalState'
 import { Link } from 'react-router-dom'
-import { helpHttp } from '../helpers/helpHttp'
+import useCats from '../hooks/useCats'
 
 const TaskList = () => {
   const { tasks, deleteTask, toggleTaskDone } = useContext(GlobalContext)
   const [searchTerm, setSearchTerm] = useState('')
-  const [catSerch, setCatSerch] = useState({ cat: '' })
-  const [search, setSearch] = useState(null)
-
-  const handleChange = (e) => {
-    setCatSerch({
-      ...catSerch,
-      [e.target.name]: e.target.value,
-    })
-  }
-  const handleSearch = (data) => {
-    //console.log(data);
-    setSearch(data)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (!catSerch) {
-      alert('Datos Incompletos')
-      return
-    }
-
-    handleSearch(catSerch)
-    setCatSerch('')
-  }
-
-  useEffect(() => {
-    if (search === null) return
-
-    const fetchData = async () => {
-      let gatos = `https://catfact.ninja/facts?limit=4`
-
-      const res = await helpHttp().get(gatos)
-      console.log(res)
-    }
-
-    fetchData()
-  }, [search])
 
   return (
     <div className="flex justify-center">
       {tasks.length > 0 ? (
-        <div className="w-6/12">
-          <div className="flex-grow text-right px-4 py-2 m-2 flex justify-between">
+        <div className="w-6/12  justify-center ">
+          <div className="flex-grow text-right px-4 py-2 m-2 flex  justify-center  ">
             <input
               type="text"
-              placeholder="Buscar"
+              placeholder="Filtrar"
               onChange={(event) => setSearchTerm(event.target.value)}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
+              className="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
             ></input>
           </div>
 
-          <div className="flex-grow text-right px-4 py-2 m-2 flex justify-end">
-            <input
-              type="text"
-              name="cat"
-              value={catSerch.cat}
-              placeholder="Buscar"
-              onChange={handleChange}
-              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
-            ></input>
-
-            <button className="bg-gray-600  hover:bg-green-500 py-2 px-4 m-2">
-              gatitos
-            </button>
+          <div className="flex-grow text-right px-4 py-2 m-2 flex  justify-center  ">
+            <Link
+              flex
+              items-center
+              mb-10
+              to="/cats"
+              className="bg-gray-700 hover:bg-gray-600 py-2 px-4 m-2"
+            >
+              <h5 className="text-gray-100 font-bold text-2xl">Ramdom gats</h5>
+            </Link>
           </div>
 
           {tasks
@@ -85,7 +44,7 @@ const TaskList = () => {
             })
             .map((task) => (
               <div
-                className="bg-gray-900 px-20 py-5 text-white shadow-2xl mb-4 flex justify-between"
+                className="bg-gray-700 px-20 py-5 text-white shadow-2xl mb-4 flex justify-between"
                 key={task.id}
               >
                 <div className="text-left">
@@ -94,9 +53,14 @@ const TaskList = () => {
                   <p>{task.description}</p>
                   <button
                     className="bg-purple-600 hover:bg-purple-500 py-1 px-3 mt-2 "
+                    className={
+                      !task.done
+                        ? 'bg-pink-600 hover:bg-pink-500 py-1 px-3 mt-2 '
+                        : 'bg-green-600 hover:bg-green-500 py-1 px-3 mt-2  '
+                    }
                     onClick={() => toggleTaskDone(task.id)}
                   >
-                    {task.done ? 'Undone' : 'Done'}
+                    {task.done ? 'Hecho' : 'Pendiente'}
                   </button>
                 </div>
                 <div>

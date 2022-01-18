@@ -1,9 +1,11 @@
-import { Route, Routes } from "react-router-dom";
-import { GlobalProvider } from "./context/GlobalState";
+import { Route, Routes } from 'react-router-dom'
+import { GlobalProvider } from './context/GlobalState'
 
-import TaskList from "./components/TaskList";
-import TaskForm from "./components/TaskForm";
-import Heading from "./components/Heading";
+import TaskList from './components/TaskList'
+import TaskForm from './components/TaskForm'
+import Heading from './components/Heading'
+
+import Catlist from './components/CatList'
 
 function App() {
   return (
@@ -16,11 +18,12 @@ function App() {
             <Route path="/" element={<TaskList />} />
             <Route path="/add" element={<TaskForm />} />
             <Route path="/edit/:id" element={<TaskForm />} />
+            <Route path="/cats" element={<Catlist />} />
           </Routes>
         </div>
       </div>
     </GlobalProvider>
-  );
+  )
 }
 
-export default App;
+export default App
