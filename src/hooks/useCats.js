@@ -6,6 +6,7 @@ const useCats = () => {
   const [search, setSearch] = useState(null)
   const [resGatos, setResGatos] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [validacion, setValidacion] = useState(false)
 
   const handleChange = (e) => {
     setCatSerch({
@@ -21,22 +22,24 @@ const useCats = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    console.log(catSerch.cat)
     if (!catSerch) {
       alert('Datos Incompletos')
       return
     }
 
-    handleSearch(catSerch)
+    handleSearch(parseInt(catSerch.cat, 10))
     setCatSerch({ cat: '' })
   }
 
   useEffect(() => {
+    console.log(validacion)
+    if (isNaN(search)) return setValidacion(true)
+    setSearch(null)
     if (search === null) return
-    console.log(search)
-    console.log(catSerch)
 
     const fetchData = async () => {
-      let gatos = `https://catfact.ninja/facts?limit=${search.cat}`
+      let gatos = `https://catfact.ninja/facts?limit=${search}`
 
       setLoading(true)
 
@@ -45,9 +48,14 @@ const useCats = () => {
 
       setResGatos(dataRes.data)
       setLoading(false)
+      setValidacion(false)
     }
 
     fetchData()
+
+    // console.log(search)
+    // console.log(catSerch)
+    console.log(validacion)
   }, [search])
 
   return {
@@ -56,6 +64,7 @@ const useCats = () => {
     handleSubmit,
     resGatos,
     loading,
+    validacion,
   }
 }
 
