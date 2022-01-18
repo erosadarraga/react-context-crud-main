@@ -16,7 +16,7 @@ const TaskList = () => {
         to="/cats"
         className="bg-gray-700 hover:bg-gray-600 py-2 px-4 m-2 rounded"
       >
-        <h5 className="text-gray-100 font-bold text-2xl">Ramdom cats</h5>
+        <h5 className="text-gray-100 font-bold text-2xl">Random cats</h5>
       </Link>
       {tasks.length > 0 ? (
         <div className="w-6/12  justify-center ">
