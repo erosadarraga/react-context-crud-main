@@ -5,6 +5,14 @@ import { Link } from 'react-router-dom'
 const TaskList = () => {
   const { tasks, deleteTask, toggleTaskDone } = useContext(GlobalContext)
   const [searchTerm, setSearchTerm] = useState('')
+  const [catSerch, setCatSerch] = useState({cat:cat})
+
+  const handleChange = (e) => {
+    setCatSerch({
+      ...catSerch,
+      [e.target.name]: e.target.value,
+    })
+  }
 
   return (
     <div className="flex justify-center">
@@ -13,6 +21,16 @@ const TaskList = () => {
           <div className="flex-grow text-right px-4 py-2 m-2">
             <input
               type="text"
+              placeholder="Buscar"
+              onChange={(event) => setSearchTerm(event.target.value)}
+              className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
+            ></input>
+          </div>
+          <div className="flex-grow text-right px-4 py-2 m-2">
+            <input
+              type="text"
+              name='cat'
+              value={catSerch.cat}
               placeholder="Buscar"
               onChange={(event) => setSearchTerm(event.target.value)}
               className="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded inline-flex items-center"
