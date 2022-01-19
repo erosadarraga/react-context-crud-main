@@ -7,6 +7,7 @@ const useCats = () => {
   const [resGatos, setResGatos] = useState(null)
   const [loading, setLoading] = useState(false)
   const [validacion, setValidacion] = useState(false)
+  const [validacionInput, setValidacionInput] = useState(false)
 
   const handleChange = (e) => {
     setCatSerch({
@@ -21,7 +22,9 @@ const useCats = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
+    if (catSerch.cat === '') {
+      return setValidacionInput(true)
+    }
     console.log(catSerch.cat)
     if (!catSerch) {
       alert('Datos Incompletos')
@@ -49,6 +52,7 @@ const useCats = () => {
       setResGatos(dataRes.data)
       setLoading(false)
       setValidacion(false)
+      setValidacionInput(false)
     }
 
     fetchData()
@@ -65,6 +69,8 @@ const useCats = () => {
     resGatos,
     loading,
     validacion,
+    catSerch,
+    validacionInput,
   }
 }
 
