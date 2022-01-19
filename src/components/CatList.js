@@ -77,7 +77,7 @@ const Catlist = () => {
                   New
                 </span>
                 <span class="font-semibold mr-2 text-left flex-auto">
-                  Get the coolest
+                  Ingresa un numero
                 </span>
                 <svg
                   class="fill-current opacity-75 h-4 w-4"
